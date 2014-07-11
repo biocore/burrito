@@ -51,5 +51,5 @@ setup(name='burrito',
       packages=find_packages(),
       install_requires=['future'],
       extras_require={'test': ["nose >= 0.10.1", "pep8", "flake8",
-                               "coverage"]},
+                               "coverage", "coveralls"]},
       classifiers=classifiers)
