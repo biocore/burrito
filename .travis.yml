@@ -5,12 +5,11 @@ python:
   - "3.3"
   - "3.4"
 install:
-  - pip install nose pep8 flake8 coverage coveralls
+  - pip install nose pep8 flake8 coveralls
   - pip install .
 script:
-  - nosetests
+  - nosetests --with-coverage
   - pep8 burrito setup.py
   - flake8 burrito setup.py
-  - coverage run setup.py test
-  - coverage report -m
+after_success:
   - coveralls
