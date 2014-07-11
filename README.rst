@@ -1,6 +1,8 @@
 burrito
 =======
 
+|Build Status|
+
 burrito, canonically pronounced *boar-eee-toe*, is a Python framework for
 wrapping and controlling command-line applications.
 
@@ -29,3 +31,6 @@ available under the BSD license. The original authors of the application
 controller framework code in PyCogent are Greg Caporaso
 (`@gregcaporaso <https://github.com/gregcaporaso>`__), Sandra Smit,
 Micah Hamady, and Rob Knight (`@rob-knight <https://github.com/rob-knight>`__).
+
+.. |Build Status| image:: https://travis-ci.org/biocore/burrito.svg?branch=master
+   :target: https://travis-ci.org/biocore/burrito
