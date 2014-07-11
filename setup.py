@@ -10,7 +10,6 @@
 
 __version__ = "0.0.0-dev"
 
-import os
 from setuptools import find_packages, setup
 
 classes = """
