@@ -50,5 +50,6 @@ setup(name='burrito',
       test_suite='nose.collector',
       packages=find_packages(),
       install_requires=['future'],
-      extras_require={'test': ["nose >= 0.10.1", "pep8", "flake8"]},
+      extras_require={'test': ["nose >= 0.10.1", "pep8", "flake8",
+                               "coverage"]},
       classifiers=classifiers)

@@ -1,7 +1,7 @@
 burrito
 =======
 
-|Build Status|
+|Build Status| |Coverage Status|
 
 burrito, canonically pronounced *boar-eee-toe*, is a Python framework for
 wrapping and controlling command-line applications.
@@ -40,3 +40,5 @@ Micah Hamady, and Rob Knight (`@rob-knight <https://github.com/rob-knight>`__).
 
 .. |Build Status| image:: https://travis-ci.org/biocore/burrito.svg?branch=master
    :target: https://travis-ci.org/biocore/burrito
+.. |Coverage Status| image:: https://coveralls.io/repos/biocore/burrito/badge.png
+   :target: https://coveralls.io/r/biocore/burrito
