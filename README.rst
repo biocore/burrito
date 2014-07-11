@@ -9,7 +9,7 @@ wrapping and controlling command-line applications.
 What's with the name?
 ---------------------
 
-This tool allows developers to wrap command line applications, just as burritos
+This tool allows developers to wrap command-line applications, just as burritos
 wrap delicious foods. Both hide the potentially unsightly details.
 
 Installation
