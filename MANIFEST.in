@@ -1,0 +1,8 @@
+include CHANGELOG.md
+include LICENSE
+include README.rst
+
+graft burrito
+
+global-exclude *.pyc
+global-exclude *.pyo
