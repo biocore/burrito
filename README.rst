@@ -1,7 +1,8 @@
 burrito
 =======
 
-Python framework for wrapping and controlling command-line applications.
+burrito, canonically pronounced *boar-eee-toe*, is a Python framework for
+wrapping and controlling command-line applications.
 
 Installation
 ------------
