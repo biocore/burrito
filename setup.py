@@ -8,7 +8,7 @@
 # The full license is in the file LICENSE, distributed with this software.
 # ----------------------------------------------------------------------------
 
-__version__ = "0.9.0"
+__version__ = "0.9.0-dev"
 
 from setuptools import find_packages, setup
 
