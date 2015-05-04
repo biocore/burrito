@@ -460,10 +460,11 @@ class CommandLineApplicationTests(TestCase):
         # because parameters are printed in arbitrary order
         app.Parameters['-F'].on('junk.txt')
         app.Parameters['--duh'].on()
-        self.assertTrue(app.BaseCommand ==
-                        'cd "/tmp/"; /tmp/CLAppTester.py -F "junk.txt" --duh'
-                        or app.BaseCommand ==
-                        'cd "/tmp/"; /tmp/CLAppTester.py --duh -F "junk.txt"')
+        self.assertTrue(
+            app.BaseCommand ==
+            'cd "/tmp/"; /tmp/CLAppTester.py -F "junk.txt" --duh' or
+            app.BaseCommand ==
+            'cd "/tmp/"; /tmp/CLAppTester.py --duh -F "junk.txt"')
         # Space in _command
         app = CLAppTester_space_in_command()
         self.assertEqual(app.BaseCommand,
@@ -991,8 +992,8 @@ class CommandLineApplicationTests(TestCase):
         obs = app.getTmpFilename(include_class_id=True)
         # leaving the strings in this statement so it's clear where the
         # expected length comes from
-        self.assertEqual(len(obs), len(app.TmpDir) + app.TmpNameLen
-                         + len('tmp') + len('CLAppTester') + len('.txt'))
+        self.assertEqual(len(obs), len(app.TmpDir) + app.TmpNameLen +
+                         len('tmp') + len('CLAppTester') + len('.txt'))
         assert obs.startswith(app.TmpDir)
         chars = set(obs[18:])
         assert len(chars) > 1
@@ -1000,8 +1001,8 @@ class CommandLineApplicationTests(TestCase):
         obs = app.getTmpFilename(include_class_id=False)
         # leaving the strings in this statement so it's clear where the
         # expected length comes from
-        self.assertEqual(len(obs), len(app.TmpDir) + app.TmpNameLen
-                         + len('tmp') + len('.txt'))
+        self.assertEqual(len(obs), len(app.TmpDir) + app.TmpNameLen +
+                         len('tmp') + len('.txt'))
         assert obs.startswith(app.TmpDir)
 
     def test_getTmpFilename_prefix_suffix_result_constructor(self):
@@ -1065,8 +1066,8 @@ class ConvenienceFunctionTests(TestCase):
         # leaving the strings in this statement so it's clear where the
         # expected length comes from
         self.assertEqual(len(obs),
-                         len(self.tmp_dir) + len('/') + self.tmp_name_len
-                         + len('tmp') + len('.txt'))
+                         len(self.tmp_dir) + len('/') + self.tmp_name_len +
+                         len('tmp') + len('.txt'))
         self.assertTrue(obs.startswith(self.tmp_dir))
 
         # different results on different calls
@@ -1076,8 +1077,8 @@ class ConvenienceFunctionTests(TestCase):
         # leaving the strings in this statement so it's clear where the
         # expected length comes from
         self.assertEqual(len(obs),
-                         len(self.tmp_dir) + len('/') + self.tmp_name_len
-                         + len('tmp') + len('.txt'))
+                         len(self.tmp_dir) + len('/') + self.tmp_name_len +
+                         len('tmp') + len('.txt'))
         assert obs.startswith(self.tmp_dir)
 
     def test_get_tmp_filename_prefix_suffix_constructor(self):
