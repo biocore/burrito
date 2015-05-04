@@ -169,7 +169,7 @@ class CommandLineApplication(Application):
     _working_dir = None
 
     def __init__(self, params=None, InputHandler=None, SuppressStderr=None,
-                 SuppressStdout=None, WorkingDir=None, TmpDir='/tmp',
+                 SuppressStdout=None, WorkingDir=None, TmpDir=gettempdir(),
                  TmpNameLen=20, HALT_EXEC=False):
         """ Initialize the CommandLineApplication object
 
@@ -192,8 +192,7 @@ class CommandLineApplication(Application):
                 running the script doesn't have write access to the current
                 working directory
                 WARNING: WorkingDir MUST be an absolute path!
-            TmpDir: the directory where temp files will be created, /tmp
-                by default
+            TmpDir: the directory where temp files will be created
             TmpNameLen: the length of the temp file name
             HALT_EXEC: if True, raises exception w/ command output just
             before execution, doesn't clean up temp files. Default False.
@@ -495,11 +494,11 @@ class CommandLineApplication(Application):
         """
         return {}
 
-    def getTmpFilename(self, tmp_dir="/tmp", prefix='tmp', suffix='.txt',
+    def getTmpFilename(self, tmp_dir=None, prefix='tmp', suffix='.txt',
                        include_class_id=False, result_constructor=FilePath):
         """ Return a temp filename
 
-            tmp_dir: path for temp file
+            tmp_dir: directory where temporary files will be stored
             prefix: text to append to start of file name
             suffix: text to append to end of file name
             include_class_id: if True, will append a class identifier (built
@@ -745,14 +744,13 @@ def get_tmp_filename(tmp_dir=gettempdir(), prefix="tmp", suffix=".txt",
                      result_constructor=FilePath):
     """ Generate a temporary filename and return as a FilePath object
 
-        tmp_dir: the directory to house the tmp_filename (default: '/tmp')
-        prefix: string to append to beginning of filename (default: 'tmp')
+        tmp_dir: the directory to house the tmp_filename
+        prefix: string to append to beginning of filename
             Note: It is very useful to have prefix be descriptive of the
             process which is creating the temporary file. For example, if
             your temp file will be used to build a temporary blast database,
             you might pass prefix=TempBlastDB
         suffix: the suffix to be appended to the temp filename
-            (default '.txt')
         result_constructor: the constructor used to build the result filename
             (default: cogent.app.parameters.FilePath). Note that joining
             FilePath objects with one another or with strings, you must use
