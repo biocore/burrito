@@ -218,6 +218,8 @@ class CommandLineApplication(Application):
         else:
             working_dir = self._working_dir or getcwd()
         self.WorkingDir = FilePath(working_dir)
+        if not TmpDir.endswith("/"):
+            TmpDir += "/"
         self.TmpDir = FilePath(TmpDir)
         self.TmpNameLen = TmpNameLen
         self.HaltExec = HALT_EXEC
