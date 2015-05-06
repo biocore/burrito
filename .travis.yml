@@ -5,7 +5,7 @@ python:
   - "3.3"
   - "3.4"
 install:
-  - pip install nose pep8 flake8 coveralls
+  - pip install nose flake8 coveralls
   - pip install .
 script:
   - nosetests --with-coverage
