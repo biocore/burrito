@@ -1009,7 +1009,6 @@ class CommandLineApplicationTests(TestCase):
         """TmpFilename: result has correct prefix, suffix, type"""
         app = CLAppTester()
         obs = app.getTmpFilename(prefix='blah', include_class_id=False)
-        print app.TmpDir, obs
         self.assertTrue(obs.startswith(app.TmpDir + 'blah'))
         obs = app.getTmpFilename(suffix='.blah', include_class_id=False)
         self.assertTrue(obs.endswith('.blah'))
