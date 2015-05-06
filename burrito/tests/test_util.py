@@ -460,10 +460,11 @@ class CommandLineApplicationTests(TestCase):
         # because parameters are printed in arbitrary order
         app.Parameters['-F'].on('junk.txt')
         app.Parameters['--duh'].on()
-        self.assertTrue(app.BaseCommand ==
-                        'cd "/tmp/"; /tmp/CLAppTester.py -F "junk.txt" --duh'
-                        or app.BaseCommand ==
-                        'cd "/tmp/"; /tmp/CLAppTester.py --duh -F "junk.txt"')
+        self.assertTrue(
+            app.BaseCommand ==
+            'cd "/tmp/"; /tmp/CLAppTester.py -F "junk.txt" --duh' or
+            app.BaseCommand ==
+            'cd "/tmp/"; /tmp/CLAppTester.py --duh -F "junk.txt"')
         # Space in _command
         app = CLAppTester_space_in_command()
         self.assertEqual(app.BaseCommand,
@@ -760,7 +761,7 @@ class CommandLineApplicationTests(TestCase):
         self.assertEqual(app.InputHandler, '_input_as_string')
         assert not app.SuppressStderr
         # TmpDir is what we expect
-        self.assertEqual(app.TmpDir, '/tmp/tmp2')
+        self.assertEqual(app.TmpDir, '/tmp/tmp2/')
         # test_command
         self.assertEqual(app.BaseCommand,
                          'cd "/tmp/"; /tmp/CLAppTester.py -F "p_file.txt"')
@@ -788,7 +789,7 @@ class CommandLineApplicationTests(TestCase):
         self.assertEqual(app.InputHandler, '_input_as_string')
         assert not app.SuppressStderr
         # TmpDir is what we expect
-        self.assertEqual(app.TmpDir, '/tmp/tmp space')
+        self.assertEqual(app.TmpDir, '/tmp/tmp space/')
         # test_command
         self.assertEqual(app.BaseCommand,
                          'cd "/tmp/"; /tmp/CLAppTester.py -F "p_file.txt"')
@@ -893,7 +894,7 @@ class CommandLineApplicationTests(TestCase):
         """TmpFilename handles alt tmp_dir, prefix and suffix properly"""
         app = CLAppTester()
         obs = app.getTmpFilename(include_class_id=False)
-        self.assertTrue(obs.startswith('/tmp/tmp'))
+        self.assertTrue(obs.startswith(app.TmpDir + 'tmp'))
         self.assertTrue(obs.endswith('.txt'))
 
         obs = app.getTmpFilename(tmp_dir="/tmp/blah", prefix="app_ctl_test",
@@ -908,9 +909,9 @@ class CommandLineApplicationTests(TestCase):
         # set the default to False if they change it for testing purposes
         app = CLAppTester()
         self.assertFalse(app.getTmpFilename().
-                         startswith('/tmp/tmpCLAppTester'))
+                         startswith(app.TmpDir + 'tmpCLAppTester'))
         self.assertTrue(app.getTmpFilename(include_class_id=True).
-                        startswith('/tmp/tmpCLAppTester'))
+                        startswith(app.TmpDir + 'tmpCLAppTester'))
 
     def test_input_as_path(self):
         """CLAppTester: _input_as_path casts data to FilePath"""
@@ -991,8 +992,8 @@ class CommandLineApplicationTests(TestCase):
         obs = app.getTmpFilename(include_class_id=True)
         # leaving the strings in this statement so it's clear where the
         # expected length comes from
-        self.assertEqual(len(obs), len(app.TmpDir) + len('/') + app.TmpNameLen
-                         + len('tmp') + len('CLAppTester') + len('.txt'))
+        self.assertEqual(len(obs), len(app.TmpDir) + app.TmpNameLen +
+                         len('tmp') + len('CLAppTester') + len('.txt'))
         assert obs.startswith(app.TmpDir)
         chars = set(obs[18:])
         assert len(chars) > 1
@@ -1000,24 +1001,24 @@ class CommandLineApplicationTests(TestCase):
         obs = app.getTmpFilename(include_class_id=False)
         # leaving the strings in this statement so it's clear where the
         # expected length comes from
-        self.assertEqual(len(obs), len(app.TmpDir) + len('/') + app.TmpNameLen
-                         + len('tmp') + len('.txt'))
+        self.assertEqual(len(obs), len(app.TmpDir) + app.TmpNameLen +
+                         len('tmp') + len('.txt'))
         assert obs.startswith(app.TmpDir)
 
     def test_getTmpFilename_prefix_suffix_result_constructor(self):
         """TmpFilename: result has correct prefix, suffix, type"""
         app = CLAppTester()
         obs = app.getTmpFilename(prefix='blah', include_class_id=False)
-        self.assertTrue(obs.startswith('/tmp/blah'))
+        self.assertTrue(obs.startswith(app.TmpDir + 'blah'))
         obs = app.getTmpFilename(suffix='.blah', include_class_id=False)
         self.assertTrue(obs.endswith('.blah'))
         # Prefix defaults to not include the class name
         obs = app.getTmpFilename(include_class_id=False)
-        self.assertFalse(obs.startswith('/tmp/tmpCLAppTester'))
+        self.assertFalse(obs.startswith(app.TmpDir + 'tmpCLAppTester'))
         self.assertTrue(obs.endswith('.txt'))
         # including class id functions correctly
         obs = app.getTmpFilename(include_class_id=True)
-        self.assertTrue(obs.startswith('/tmp/tmpCLAppTester'))
+        self.assertTrue(obs.startswith(app.TmpDir + 'tmpCLAppTester'))
         self.assertTrue(obs.endswith('.txt'))
 
         # result as FilePath
@@ -1064,8 +1065,8 @@ class ConvenienceFunctionTests(TestCase):
         # leaving the strings in this statement so it's clear where the
         # expected length comes from
         self.assertEqual(len(obs),
-                         len(self.tmp_dir) + len('/') + self.tmp_name_len
-                         + len('tmp') + len('.txt'))
+                         len(self.tmp_dir) + len('/') + self.tmp_name_len +
+                         len('tmp') + len('.txt'))
         self.assertTrue(obs.startswith(self.tmp_dir))
 
         # different results on different calls
@@ -1075,8 +1076,8 @@ class ConvenienceFunctionTests(TestCase):
         # leaving the strings in this statement so it's clear where the
         # expected length comes from
         self.assertEqual(len(obs),
-                         len(self.tmp_dir) + len('/') + self.tmp_name_len
-                         + len('tmp') + len('.txt'))
+                         len(self.tmp_dir) + len('/') + self.tmp_name_len +
+                         len('tmp') + len('.txt'))
         assert obs.startswith(self.tmp_dir)
 
     def test_get_tmp_filename_prefix_suffix_constructor(self):

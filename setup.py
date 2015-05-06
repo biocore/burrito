@@ -8,9 +8,9 @@
 # The full license is in the file LICENSE, distributed with this software.
 # ----------------------------------------------------------------------------
 
-__version__ = "0.9.0-dev"
-
 from setuptools import find_packages, setup
+
+__version__ = "0.9.0-dev"
 
 classes = """
     Development Status :: 5 - Production/Stable
@@ -50,6 +50,6 @@ setup(name='burrito',
       test_suite='nose.collector',
       packages=find_packages(),
       install_requires=['future'],
-      extras_require={'test': ["nose >= 0.10.1", "pep8", "flake8",
+      extras_require={'test': ["nose >= 0.10.1", "flake8",
                                "coveralls"]},
       classifiers=classifiers)
