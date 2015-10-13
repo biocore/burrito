@@ -277,11 +277,12 @@ class CommandLineApplication(Application):
         # Determine if error should be raised due to exit status of
         # appliciation
         if not self._accept_exit_status(exit_status):
-            raise ApplicationError('Unacceptable application exit ' +
-                                   'status: %s\n' % str(exit_status) +
-                                   'Command:\n%s\n' % command +
-                                   'StdOut:\n%s\n' % open(outfile).read() +
-                                   'StdErr:\n%s\n' % open(errfile).read())
+            with open(outfile) as out, open(errfile) as err:
+                raise ApplicationError('Unacceptable application exit ' +
+                                       'status: %s\n' % str(exit_status) +
+                                       'Command:\n%s\n' % command +
+                                       'StdOut:\n%s\n' % out.read() +
+                                       'StdErr:\n%s\n' % err.read())
 
         # open the stdout and stderr if not being suppressed
         out = None
